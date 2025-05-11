@@ -1,0 +1,124 @@
+
+  <!DOCTYPE html>
+  <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BEAUTY PRODUCTS | Home</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <script defer>
+      const products = {
+        skincare: [
+          { id: 1, name: "Minimalist Dull Skin, Dark Spots & Uneven Tone Treatment 10% Vitamin C Face Serum", price: "Rs 600", image : "serum.png", rating: 4.5, reviews: 56, description: "A glowing facial serum for radiant skin.<br> Formulated & Tested for Sensitive Skin with Ethyl Ascorbic Acid & Pha <br> All Skin Types<br>For Men & Women <br> 30Ml" },
+          { id: 2, name: "Hydra-Essentiel [HA²] Moisturizes And Quenches, Rich Cream (For Very Dry Skin)", price: "Rs 4,186", image: "hyd.png", rating: 4.0, reviews: 125, description: "A moisturizing daytime facial cream for normal to dry skin <br> Contains organic leaf of life extract & organic alpine willow herb to hydrate & plump skin <br> Blended with Beautyberry to revive a radiant glowProduct Details <br> A moisturizing daytime facial cream for normal to dry skin <br> Contains organic leaf of life extract & organic alpine willow herb to hydrate & plump skin <br>  Blended with Beautyberry to revive a radiant glow <br> Enhanced with Hyaluronic Power Complex developed by Clarins Laboratories to boost skin's natural self-hydration mechanisms & preserve its moisture reserves."},
+          { id: 3, name: "Shimmer Body Polishing Kit | Body Scrub | Body Butter | Combo", price: "Rs 719", image: "scrub.png", rating: 4.5, reviews: 34, description: "Our bestsellers get a shimmery twist in this limited edition Shimmer Body Polishing Kit! Get ready to witness a glow like never before! Gold Dust & Coffee blend in the Shimmer Body Scrub envelop your skin for gentle exfoliation as its inviting aroma and shine makes it a shower to remember. Step out and squeeze the irresistible mix of soft shimmer & Cocoa Butter onto your body and watch as it effortlessly melts into your skin to deeply moisturize, leaving a captivating glow that outshines all! Pamper yourself and let this combo be your go-to for turning heads and stealing the show <br> This pack contains: <br> Shimmer Body Butter With Cocoa Butter - 150g <br> Shimmer Body Scrub With Coffee - 150g " },
+        ],
+        makeup: [
+          { id: 4, name: "Dior Lip Glow oil", price: "Rs 3,000 ", image: "dior.jpg", rating: 4.8, reviews: 45, description: " <ul> <li> Brand Name: DIOR <li>Product Name: DIOR ADDICT <li> Product Type: LIP GLOW OIL <li> Product Condition - Package Condition: NEW WITH BOX </ul>" },
+          { id: 5, name: "Maybelline New York The Nudes Eyeshadow Palette", price: "Rs 499", image: "pal.png", rating: 4.2, reviews: 22, description: "Versatile shades for all skin tones.100% Original Products<br> Pay on delivery might be available<br> Easy 14 days exchanges<br> This item is only exchangeable for the same or a different size, if available, and cannot be returnedor that stays on all day." },
+          { id: 9, name: "Lakme 9To5 Primer+Matte Perfect Cover Foundation", price: "Rs 200", image: "lakme.png", rating: 4.3, reviews: 27, description: "Long-Lasting Mini Foundation 15ml- Warm Beige W240r." },
+        ],
+        haircare: [
+          { id: 7, name: "Nourishing Shampoo", price: "$18", image: "https://via.placeholder.com/250x200", rating: 4.3, reviews: 27, description: "Cleanses and strengthens hair." },
+          { id: 8, name: "Repair Conditioner", price: "$20", image: "https://via.placeholder.com/250x200", rating: 4.1, reviews: 31, description: "Restores shine and smoothness." },
+          { id: 9, name: "Nourishing Shampoo", price: "$18", image: "https://via.placeholder.com/250x200", rating: 4.3, reviews: 27, description: "Cleanses and strengthens hair." },
+        ],
+        fragrance: [
+          { id: 10, name: "Floral Mist", price: "$35", image: "https://via.placeholder.com/250x200", rating: 4.7, reviews: 40, description: "Light and fresh floral scent." },
+          { id: 11, name: "Evening Elixir", price: "$40", image: "https://via.placeholder.com/250x200", rating: 4.9, reviews: 29, description: "Elegant fragrance for special nights." },
+          { id: 12, name: "Nourishing Shampoo", price: "$18", image: "https://via.placeholder.com/250x200", rating: 4.3, reviews: 27, description: "Cleanses and strengthens hair." },
+        ]
+      };
+  
+      function showCategory(category) {
+        displayProducts(products[category]);
+      }
+  
+      function displayProducts(productList) {
+        const container = document.getElementById("product-list");
+        container.innerHTML = productList.map(product => `
+          <div class="card col-md-3 m-3">
+            <img src="${product.image}" class="card-img-top" alt="${product.name}">
+            <div class="card-body">
+              <h5 class="card-title">${product.name}</h5>
+              <p class="card-text">${product.price}</p>
+              <p class="text-muted">⭐ ${product.rating} (${product.reviews} reviews)</p>
+              <button class="btn btn-primary m-1" onclick='viewDetails(${JSON.stringify(product)})'>View Details</button>
+              <button class="btn btn-success m-1" onclick="addToCart('${product.name}')">Add to Cart</button>
+              <button class="btn btn-outline-danger m-1" onclick="addToWishlist('${product.name}')">♡ Wishlist</button>
+            </div>
+          </div>
+        `).join('');
+      }
+  
+      function viewDetails(product) {
+        const container = document.getElementById("product-list");
+        container.innerHTML = `
+          <div class="card col-md-6 m-auto">
+            <img src="${product.image}" class="card-img-top" alt="${product.name}">
+            <div class="card-body">
+              <h3 class="card-title">${product.name}</h3>
+              <p class="card-text">${product.price}</p>
+              <p class="text-muted">⭐ ${product.rating} (${product.reviews} reviews)</p>
+              <p>${product.description}</p>
+              <button class="btn btn-success" onclick="addToCart('${product.name}')">Add to Cart</button>
+              <button class="btn btn-outline-danger" onclick="addToWishlist('${product.name}')">♡ Wishlist</button>
+              <button class="btn btn-secondary mt-2" onclick="resetPage()">Back</button>
+            </div>
+          </div>
+        `;
+      }
+  
+      function resetPage() {
+        document.getElementById("product-list").innerHTML = '';
+      }
+  
+      function addToCart(name) {
+        alert("Added to cart: " + name);
+      }
+  
+      function addToWishlist(name) {
+        alert("Added to wishlist: " + name);
+      }
+  
+      function searchProducts() {
+        const query = document.getElementById("search-input").value.toLowerCase();
+        const allProducts = Object.values(products).flat();
+        const results = allProducts.filter(p => p.name.toLowerCase().includes(query));
+        displayProducts(results);
+      }
+    </script>
+  </head>
+  <body class="bg-light">
+    <header class="bg-white py-4 border-bottom">
+      <div class="container text-center">
+        <h1 class="text-danger">CODER'S SHOP</h1>
+        <h2 class="text-secondary">Your Destination for Beauty Products</h2>
+      </div>
+    </header>
+  
+    <div class="container my-4">
+      <div class="input-group mb-4">
+        <input type="text" id="search-input" class="form-control" placeholder="Search products...">
+        <button class="btn btn-outline-secondary" onclick="searchProducts()">Search</button>
+      </div>
+  
+      <div class="d-flex justify-content-center flex-wrap gap-2 mb-4">
+        <button class="btn btn-danger" onclick="showCategory('skincare')">Skincare</button>
+        <button class="btn btn-danger" onclick="showCategory('makeup')">Makeup</button>
+        <button class="btn btn-danger" onclick="showCategory('haircare')">Haircare</button>
+        <button class="btn btn-danger" onclick="showCategory('fragrance')">Fragrance</button>
+      </div>
+  
+      <div id="product-list" class="row justify-content-center"></div>
+    </div>
+  
+    <footer class="bg-white text-center py-3 border-top">
+      <small>&copy; 2025 Beauty Bliss. All rights reserved.</small>
+    </footer>
+  
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+  </html>
+  
